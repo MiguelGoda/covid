@@ -37,6 +37,7 @@ app.use((req, res, next) => {
 //routes
 app.use(require("./routes"));
 app.use(require("./routes/authentication"));
+app.use("/persona", require("./routes/persona"));
 
 
 //public
