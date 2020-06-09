@@ -42,6 +42,7 @@ app.use(express.json());
 
 //global variables
 app.use((req, res, next) => {
+  app.locals.message = req.flash('message');
   app.locals.success = req.flash("success");
   next();
 });
@@ -50,7 +51,7 @@ app.use((req, res, next) => {
 app.use(require("./routes"));
 app.use(require("./routes/authentication"));
 app.use("/persona", require("./routes/persona"));
-
+app.use("/sintomas", require("./routes/sintomas"));
 
 //public
 app.use(express.static(path.join(__dirname, "public")));

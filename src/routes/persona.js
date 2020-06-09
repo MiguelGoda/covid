@@ -31,15 +31,24 @@ router.post("/add", async (req, res) => {
         sexo
       };
       await pool.query("INSERT INTO persona SET ?", [newPersona]);
+      console.log("antes del catch");
       req.flash("success", "Registrado correctamente");
       res.redirect("/persona/add");
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') {
-        req.flash("success", "El CI ya se encuentra resgistrado")
+        
+        console.log("aqui if as");
+        
+        console.error(error.code); 
+        console.log(req.flash("success"));
+        req.flash("message", "El CI ya se encuentra resgistrado")
         res.redirect("/persona/add");
         
-      } else {  
-        req.flash("success", "error al registrar")
+      } else {
+        console.log("aqui else");
+        
+        req.flash("message", "error al registrar")
+        console.error(error + " else"); 
         res.redirect("/persona/add");
       }  
     }
