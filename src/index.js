@@ -2,6 +2,10 @@ const express =require('express');
 const morgan = require('morgan');
 const exphbs = require("express-handlebars");
 const path = require('path');
+const flash = require("connect-flash");
+const session = require("express-session");
+const MySQLSore = require('express-mysql-session');
+const { database } =  require('./keys');
 
 
 
@@ -25,13 +29,21 @@ app.set("view engine", ".hbs");
 
 
 //middleware
+app.use(session({
+  secret:'covid_session',
+  resave: false,
+  saveUninitialized: false,
+  store: MySQLSore(database)
+}))
+app.use(flash());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //global variables
 app.use((req, res, next) => {
-    next()
+  app.locals.success = req.flash("success");
+  next();
 });
 
 //routes
