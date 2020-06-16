@@ -54,41 +54,42 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `covid`.`tipo_control`
+-- Table `covid`.`tipo_registro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`tipo_control` (
-  `id_tipo_control` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre_tipo_control` VARCHAR(45) NULL,
-  `descripcion_tipo_control` VARCHAR(200) NULL,
-  PRIMARY KEY (`id_tipo_control`))
+CREATE TABLE IF NOT EXISTS `covid`.`tipo_registro` (
+  `id_tipo_registro` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_registro` VARCHAR(45) NULL,
+  `descripcion_tipo_registro` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_tipo_registro`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `covid`.`categoria_control`
+-- Table `covid`.`nivel_enfermedad`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`categoria_control` (
-  `id_categoria_control` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre_categoria_control` VARCHAR(45) NULL,
-  `descripcion_categoria_control` VARCHAR(200) NULL,
-  PRIMARY KEY (`id_categoria_control`))
+CREATE TABLE IF NOT EXISTS `covid`.`nivel_enfermedad` (
+  `id_nivel_enfermedad` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_nivel_enfermedad` VARCHAR(45) NULL,
+  `descripcion_nivel_enfermedad` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_nivel_enfermedad`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `covid`.`sintomas`
 -- -----------------------------------------------------
--- CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
---   `id_sintomas` INT(11) NOT NULL AUTO_INCREMENT,
---   `fiebre` TINYINT NOT NULL DEFAULT 1,
---   `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
---   `tos_seca` TINYINT NOT NULL DEFAULT 1,
---   `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
---   `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
---   `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
---   `embarazo` TINYINT NOT NULL DEFAULT 1,
---   `alergias` VARCHAR(200) NULL,
---   PRIMARY KEY (`id_sintomas`))
--- ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
+  `id_sintomas` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_persona` INT(11) DEFAULT NULL,
+  `fiebre` TINYINT NOT NULL DEFAULT 1,
+  `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
+  `tos_seca` TINYINT NOT NULL DEFAULT 1,
+  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
+  `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
+  `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
+  `embarazo` TINYINT NOT NULL DEFAULT 1,
+  `alergias` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_sintomas`))
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -116,26 +117,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `covid`.`control`
+-- Table `covid`.`registro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`control` (
-  `id_control` INT(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `covid`.`registro` (
+  `id_registro` INT(11) NOT NULL AUTO_INCREMENT,
   `id_sintomas` INT(11)  DEFAULT NULL,
   `id_usuario` INT(11) DEFAULT NULL,
   `id_persona` INT(11) DEFAULT NULL,
-  `id_categoria_control` INT(11) DEFAULT NULL,
-  `tipo_control` INT(11) DEFAULT NULL,
+  `id_nivel_enfermedad` INT(11) DEFAULT NULL,
+  `tipo_registro` INT(11) DEFAULT NULL,
   `id_distrito` INT(11) DEFAULT  NULL,
-  `fecha_control` TIMESTAMP NULL DEFAULT current_timestamp,
+  `fecha_registro` TIMESTAMP NULL DEFAULT current_timestamp,
   `observaciones` VARCHAR(500) NULL,
-  `fiebre` TINYINT NOT NULL DEFAULT 1,
-  `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
-  `tos_seca` TINYINT NOT NULL DEFAULT 1,
-  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
-  `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
-  `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
-  `embarazo` TINYINT NOT NULL DEFAULT 1,
-  `alergias` VARCHAR(200) NULL,
-  PRIMARY KEY (`id_control`))
+  PRIMARY KEY (`id_registro`))
 ENGINE = InnoDB;
 
