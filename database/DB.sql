@@ -1,13 +1,3 @@
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema covid
--- -----------------------------------------------------
-
 -- -----------------------------------------------------
 -- Schema covid
 -- -----------------------------------------------------
@@ -15,10 +5,41 @@ CREATE SCHEMA IF NOT EXISTS `covid` DEFAULT CHARACTER SET utf8 COLLATE utf8_span
 USE `covid` ;
 
 -- -----------------------------------------------------
+-- Table `covid`.`tipo_persona`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `covid`.`tipo_persona` (
+  `id_tipo_persona` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_persona` VARCHAR(45) NULL,
+  `descripcion_tipo_persona` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_tipo_persona`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `covid`.`tipo_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `covid`.`tipo_usuario` (
+  `id_tipo_usuario` INT(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_usuario` VARCHAR(45) NULL,
+  `descripcion_tipo_usuario` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_tipo_usuario`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `covid`.`categoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `covid`.`categoria` (
+  `id_categoria` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_categoria` VARCHAR(45) NULL,
+  `descripcion_categoria` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_categoria`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `covid`.`persona`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `covid`.`persona` (
   `id_persona` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_tipo_persona` INT(11) unsigned DEFAULT NULL,
   `ap_paterno` VARCHAR(100) NOT NULL,
   `ap_materno` VARCHAR(100) NOT NULL,
   `nombre` VARCHAR(100) NOT NULL,
@@ -33,26 +54,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `covid`.`tipo_control`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `covid`.`tipo_control` (
+  `id_tipo_control` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_tipo_control` VARCHAR(45) NULL,
+  `descripcion_tipo_control` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_tipo_control`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `covid`.`categoria_control`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `covid`.`categoria_control` (
+  `id_categoria_control` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre_categoria_control` VARCHAR(45) NULL,
+  `descripcion_categoria_control` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_categoria_control`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `covid`.`sintomas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
-  `fiebre` TINYINT NOT NULL DEFAULT 1,
-  `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
-  `tos_seca` TINYINT NOT NULL DEFAULT 1,
-  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
-  `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
-  `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
-  `embarazo` TINYINT NOT NULL DEFAULT 1,
-  `alergias` VARCHAR(200) NULL,
-  `fecha_sintomas` TIMESTAMP NOT NULL DEFAULT current_timestamp,
-  `persona_id_persona` INT(11) NOT NULL,
-  PRIMARY KEY (`persona_id_persona`),
-  CONSTRAINT `fk_sintomas_persona`
-    FOREIGN KEY (`persona_id_persona`)
-    REFERENCES `covid`.`persona` (`id_persona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
+--   `id_sintomas` INT(11) NOT NULL AUTO_INCREMENT,
+--   `fiebre` TINYINT NOT NULL DEFAULT 1,
+--   `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
+--   `tos_seca` TINYINT NOT NULL DEFAULT 1,
+--   `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
+--   `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
+--   `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
+--   `embarazo` TINYINT NOT NULL DEFAULT 1,
+--   `alergias` VARCHAR(200) NULL,
+--   PRIMARY KEY (`id_sintomas`))
+-- ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -60,58 +96,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `covid`.`usuarios` (
   `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
-  `ap_pa_us` VARCHAR(45) NOT NULL,
-  `ap_ma_us` VARCHAR(45) NOT NULL,
-  `nombre_us` VARCHAR(45) NOT NULL,
-  `CI` VARCHAR(45) NOT NULL,
-  `cel` VARCHAR(45) NOT NULL,
+  `id_tipo_usuario` INT(11) unsigned DEFAULT NULL,
   `nick` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE INDEX `CI_UNIQUE` (`CI` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `covid`.`categoria`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`categoria` (
-  `id_categoria` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre_categoria` VARCHAR(45) NULL,
-  `descripcion_categoria` VARCHAR(200) NULL,
-  PRIMARY KEY (`id_categoria`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `covid`.`llamada`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `covid`.`llamada` (
-  `id_llamada` INT(11) NOT NULL AUTO_INCREMENT,
-  `fecha_llamada` TIMESTAMP NOT NULL,
-  `cantidad_familia` INT(11) NOT NULL,
-  `persona_id_persona` INT(11) NOT NULL,
-  `usuarios_id_usuario` INT(11) NOT NULL,
-  `categoria_id_categoria` INT(11) NOT NULL,
-  PRIMARY KEY (`id_llamada`),
-  INDEX `fk_llamada_persona1_idx` (`persona_id_persona` ASC) VISIBLE,
-  INDEX `fk_llamada_usuarios1_idx` (`usuarios_id_usuario` ASC) VISIBLE,
-  INDEX `fk_llamada_categoria1_idx` (`categoria_id_categoria` ASC) VISIBLE,
-  CONSTRAINT `fk_llamada_persona1`
-    FOREIGN KEY (`persona_id_persona`)
-    REFERENCES `covid`.`persona` (`id_persona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_llamada_usuarios1`
-    FOREIGN KEY (`usuarios_id_usuario`)
-    REFERENCES `covid`.`usuarios` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_llamada_categoria1`
-    FOREIGN KEY (`categoria_id_categoria`)
-    REFERENCES `covid`.`categoria` (`id_categoria`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
 
 
@@ -120,7 +108,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `covid`.`distritos` (
   `id_distrito` INT(11) NOT NULL AUTO_INCREMENT,
-  `nombre_distrito` VARCHAR(45) NOT NULL,
+  `id_categoria` INT(11) DEFAULT NULL,
+  `nombre_distritos` VARCHAR(100) NOT NULL,
   `observaciones` VARCHAR(200) NULL,
   PRIMARY KEY (`id_distrito`))
 ENGINE = InnoDB;
@@ -131,39 +120,22 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `covid`.`control` (
   `id_control` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_sintomas` INT(11)  DEFAULT NULL,
+  `id_usuario` INT(11) DEFAULT NULL,
+  `id_persona` INT(11) DEFAULT NULL,
+  `id_categoria_control` INT(11) DEFAULT NULL,
+  `tipo_control` INT(11) DEFAULT NULL,
+  `id_distrito` INT(11) DEFAULT  NULL,
   `fecha_control` TIMESTAMP NULL DEFAULT current_timestamp,
-  `usuarios_id_usuario` INT(11) NOT NULL,
-  `categoria_id_categoria` INT(11) NOT NULL,
-  `distritos_id_distrito` INT(11) NOT NULL,
-  `sintomas_persona_id_persona` INT(11) NOT NULL,
-  PRIMARY KEY (`id_control`),
-  INDEX `fk_control_usuarios1_idx` (`usuarios_id_usuario` ASC) VISIBLE,
-  INDEX `fk_control_categoria1_idx` (`categoria_id_categoria` ASC) VISIBLE,
-  INDEX `fk_control_distritos1_idx` (`distritos_id_distrito` ASC) VISIBLE,
-  INDEX `fk_control_sintomas1_idx` (`sintomas_persona_id_persona` ASC) VISIBLE,
-  CONSTRAINT `fk_control_usuarios1`
-    FOREIGN KEY (`usuarios_id_usuario`)
-    REFERENCES `covid`.`usuarios` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_control_categoria1`
-    FOREIGN KEY (`categoria_id_categoria`)
-    REFERENCES `covid`.`categoria` (`id_categoria`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_control_distritos1`
-    FOREIGN KEY (`distritos_id_distrito`)
-    REFERENCES `covid`.`distritos` (`id_distrito`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_control_sintomas1`
-    FOREIGN KEY (`sintomas_persona_id_persona`)
-    REFERENCES `covid`.`sintomas` (`persona_id_persona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `observaciones` VARCHAR(500) NULL,
+  `fiebre` TINYINT NOT NULL DEFAULT 1,
+  `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
+  `tos_seca` TINYINT NOT NULL DEFAULT 1,
+  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
+  `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
+  `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
+  `embarazo` TINYINT NOT NULL DEFAULT 1,
+  `alergias` VARCHAR(200) NULL,
+  PRIMARY KEY (`id_control`))
 ENGINE = InnoDB;
 
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
