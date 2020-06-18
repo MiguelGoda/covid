@@ -80,12 +80,15 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
   `id_sintomas` INT(11) NOT NULL AUTO_INCREMENT,
   `id_persona` INT(11) DEFAULT NULL,
-  `fiebre` TINYINT NOT NULL DEFAULT 1,
   `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
+  `estornudos` TINYINT NOT NULL DEFAULT 1,
+  `fiebre` TINYINT NOT NULL DEFAULT 1,
+  `fatiga` TINYINT NOT NULL DEFAULT 1,
   `tos_seca` TINYINT NOT NULL DEFAULT 1,
-  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
   `dificultad_respirar` TINYINT NOT NULL DEFAULT 1,
   `dolor_cuerpo` TINYINT NOT NULL DEFAULT 1,
+  `sin_olores` TINYINT NOT NULL DEFAULT 1,
+  `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
   `embarazo` TINYINT NOT NULL DEFAULT 1,
   `alergias` VARCHAR(200) NULL,
   PRIMARY KEY (`id_sintomas`))
@@ -98,6 +101,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `covid`.`usuarios` (
   `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
   `id_tipo_usuario` INT(11) unsigned DEFAULT NULL,
+  `id_persona` INT(11) unsigned DEFAULT NULL,
   `nick` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_usuario`))

@@ -56,9 +56,11 @@ router.post("/add", async (req, res) => {
   });
 
 
-router.get("/", async (req, res) => {
-    const personal = await pool.query("SELECT * FROM persona;");
-    res.render("persona/list", { personal });
+  router.get("/", async (req, res) => {
+    const unidades = await pool.query(
+      "SELECT tipo_persona.id_tipo_persona, tipo_persona.nombre_tipo_persona,persona.id_persona , persona.nombre  FROM tipo_persona RIGHT JOIN persona ON tipo_persona.id_tipo_persona = persona.id_tipo_persona ;"
+    );
+    res.render("unidades/list", { unidades });
   });
 
 

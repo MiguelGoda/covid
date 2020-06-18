@@ -16,10 +16,7 @@ router.post("/add", async (req, res) => {
         nombre_tipo_persona,
         descripcion_tipo_persona
        };
-       console.log(newTipoPersona);
-       
        await pool.query("INSERT INTO tipo_persona SET ?", [newTipoPersona]);
-       console.log(newTipoPersona);
        req.flash("success", "Registrado correctamente");
        res.redirect("/tipo_persona/add");
      } catch (error) {
