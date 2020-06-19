@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`usuarios` (
   `id_usuario` INT(11) NOT NULL AUTO_INCREMENT,
   `id_tipo_usuario` INT(11) unsigned DEFAULT NULL,
   `id_persona` INT(11) unsigned DEFAULT NULL,
-  `nick` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
@@ -135,4 +135,20 @@ CREATE TABLE IF NOT EXISTS `covid`.`registro` (
   `observaciones` VARCHAR(500) NULL,
   PRIMARY KEY (`id_registro`))
 ENGINE = InnoDB;
+
+
+
+SELECT tipo_persona.id_tipo_persona, tipo_persona.nombre_tipo_persona, P.id_persona , CONCAT(P.nombre, ' ', P.ap_paterno, ' ', P.ap_materno) as nombre_completo  FROM tipo_persona RIGHT JOIN persona P ON tipo_persona.id_tipo_persona = P.id_tipo_persona where P.id_tipo_persona = 2 ;
+
+insert into usuarios values ( null, 2, 'goda', 'asd', 17);
+
+select * from usuarios;
+
+truncate usuarios;
+
+describe usuarios;
+
+alter table usuarios add id_persona int(11) ;
+
+ALTER TABLE usuarios modify `password` varchar(250);
 
