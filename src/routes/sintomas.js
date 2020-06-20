@@ -3,12 +3,12 @@ const router = express.Router();
 const pool = require('../database')
 
 router.get('/add', async (req, res) => {
-    console.log(CI);
     
-    const persona = await pool.query(
-        "select id_persona, ap_paterno, ap_materno, nombre from persona where CI = ?;", [CI]
-      )
-        res.render('persona/add', {persona})
+    
+    // const persona = await pool.query(
+    //     "select id_persona, ap_paterno, ap_materno, nombre from persona where CI = ?;", [CI]
+    //   )
+        res.render('sintomas/add')
 
 });
 

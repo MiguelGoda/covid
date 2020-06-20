@@ -12,33 +12,36 @@ router.get('/add',  async (req,res) => {
 
 router.post("/add", async (req, res) => {
    try {
-     const {
-       id_tipo_persona,
-       ap_paterno,
-       ap_materno,
-       nombre,
-       fecha_nacimiento,
-       CI,
-       celular,
-       domicilio,
-       sexo
-      } = req.body;
-      const newPersona = {
-        id_tipo_persona,
-        ap_paterno,
-        ap_materno,
-        nombre,
-        fecha_nacimiento,
-        CI,
-        celular,
-        domicilio,
-        sexo
-      };
-      const cedula = {CI}
-      await pool.query("INSERT INTO persona SET ?", [newPersona]);
-      console.log( cedula, "antes del catch");
-      req.flash("success", "Registrado correctamente");
-      res.redirect("/persona/add");
+    //  const {
+    //    id_tipo_persona,
+    //    ap_paterno,
+    //    ap_materno,
+    //    nombre,
+    //    fecha_nacimiento,
+    //    CI,
+    //    celular,
+    //    domicilio,
+    //    sexo
+    //   } = req.body;
+    //   const newPersona = {
+    //     id_tipo_persona,
+    //     ap_paterno,
+    //     ap_materno,
+    //     nombre,
+    //     fecha_nacimiento,
+    //     CI,
+    //     celular,
+    //     domicilio,
+    //     sexo
+    //   };
+    //   const cedula = {CI}
+    //   // await pool.query("INSERT INTO persona SET ?", [newPersona]);
+    //   console.log(req.body);
+      
+    //   console.log( cedula, "antes del catch");
+    //   req.flash("success", "Registrado correctamente");
+    //   res.render("/sintomas/add");
+    res.render("/sintomas/add")
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') { 
         console.log("aqui if as");
@@ -56,12 +59,9 @@ router.post("/add", async (req, res) => {
   });
 
 
-  router.get("/", (req, res) => {
-    // const unidades = await pool.query(
-    //   "SELECT tipo_persona.id_tipo_persona, tipo_persona.nombre_tipo_persona,persona.id_persona , persona.nombre  FROM tipo_persona RIGHT JOIN persona ON tipo_persona.id_tipo_persona = persona.id_tipo_persona ;"
-    // );
-    // res.render("unidades/list", { unidades });
-    res.send('lista de personas')
+  router.get("/", async (req, res) => {
+    const persona = await pool.query("SELECT * FROM covid.v_lista_pacientes;")
+    res.render("persona/list", {persona})
   });
 
 

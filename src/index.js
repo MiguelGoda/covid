@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 app.use(require("./routes"));
 app.use(require("./routes/authentication"));
 app.use("/persona", require("./routes/persona"));
-app.use("/sintomas", require("./routes/persona"));
+app.use("/sintomas", require("./routes/sintomas"));
 app.use("/tipo_persona", require("./routes/tipo_persona"));
 app.use("/tipo_usuario", require("./routes/tipo_usuario"));
 

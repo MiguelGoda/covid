@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
   `sin_olores` TINYINT NOT NULL DEFAULT 1,
   `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
   `embarazo` TINYINT NOT NULL DEFAULT 1,
+  'fecha_sitomas' timestamp NOT NULL DEFAULT current_timestamp,
   `alergias` VARCHAR(200) NULL,
   PRIMARY KEY (`id_sintomas`))
 ENGINE = InnoDB;
@@ -151,4 +152,6 @@ describe usuarios;
 alter table usuarios add id_persona int(11) ;
 
 ALTER TABLE usuarios modify `password` varchar(250);
+
+
 
