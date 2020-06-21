@@ -14,3 +14,13 @@ router.get('/add', async (req, res) => {
 
 
 module.exports = router;
+
+    // diaActual = new Date();
+
+    // var day = diaActual.getDate();
+    // var month = diaActual.getMonth() + 1;
+    // var year = diaActual.getFullYear();
+
+    // fecha = year + '/' + month + '/' + day;
+    // console.log(fecha);
+    // res.render('sintomas/add', { fecha })
