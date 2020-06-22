@@ -3,8 +3,9 @@ const router = express.Router();
 const pool = require('../database')
 
 router.get('/add', async (req, res) => {
+    console.log("controlador sintomas");
     
-    
+    console.log(JSON.parse(req.query.ci))
     // const persona = await pool.query(
     //     "select id_persona, ap_paterno, ap_materno, nombre from persona where CI = ?;", [CI]
     //   )

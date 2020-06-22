@@ -12,48 +12,48 @@ router.get('/add',  async (req,res) => {
 
 router.post("/add", async (req, res) => {
    try {
-    //  const {
-    //    id_tipo_persona,
-    //    ap_paterno,
-    //    ap_materno,
-    //    nombre,
-    //    fecha_nacimiento,
-    //    CI,
-    //    celular,
-    //    domicilio,
-    //    sexo
-    //   } = req.body;
-    //   const newPersona = {
-    //     id_tipo_persona,
-    //     ap_paterno,
-    //     ap_materno,
-    //     nombre,
-    //     fecha_nacimiento,
-    //     CI,
-    //     celular,
-    //     domicilio,
-    //     sexo
-    //   };
-    //   const cedula = {CI}
-    //   // await pool.query("INSERT INTO persona SET ?", [newPersona]);
-    //   console.log(req.body);
+     const {
+       id_tipo_persona,
+       ap_paterno,
+       ap_materno,
+       nombre,
+       fecha_nacimiento,
+       CI,
+       celular,
+       domicilio,
+       sexo
+      } = req.body;
+      const newPersona = {
+        id_tipo_persona,
+        ap_paterno,
+        ap_materno,
+        nombre,
+        fecha_nacimiento,
+        CI,
+        celular,
+        domicilio,
+        sexo
+      };
+      const cedula = {CI}
+      const { CI: ci } = cedula;
+      // await pool.query("INSERT INTO persona SET ?", [newPersona]);
+      console.log(req.body);
       
-    //   console.log( cedula, "antes del catch");
-    //   req.flash("success", "Registrado correctamente");
-    //   res.render("/sintomas/add");
-    res.render("/sintomas/add")
+      console.log( ci, "antes del catch");
+      req.flash("success", "Registrado correctamente");
+      res.redirect(`/sintomas/add?ci=${JSON.stringify(CI)}`);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') { 
         console.log("aqui if as");
         console.error(error.code); 
         console.log(req.flash("success"));
         req.flash("message", "El CI ya se encuentra resgistrado")
-        res.redirect("/persona/add");
+        res.redirect("persona/add");
       } else {
         console.log("aqui else");
         req.flash("message", "error al registrar")
         console.error(error + " else"); 
-        res.redirect("/persona/add");
+        res.redirect("persona/add");
       }  
     }
   });
