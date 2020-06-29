@@ -34,14 +34,13 @@ router.post("/add", async (req, res) => {
         domicilio,
         sexo
       };
-      const cedula = {CI}
-      const { CI: ci } = cedula;
+      const ci = CI
       // await pool.query("INSERT INTO persona SET ?", [newPersona]);
-      console.log(req.body);
+      console.log('Req Body in', req.body);
       
       console.log( ci, "antes del catch");
       req.flash("success", "Registrado correctamente");
-      res.redirect(`/sintomas/add?ci=${JSON.stringify(CI)}`);
+      res.redirect(`/sintomas/add?ci=${ci}`);
     } catch (error) {
       if (error.code === 'ER_DUP_ENTRY') { 
         console.log("aqui if as");

@@ -80,7 +80,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
   `id_sintomas` INT(11) NOT NULL AUTO_INCREMENT,
   `id_persona` INT(11) DEFAULT NULL,
-  `dolor _cabeza` TINYINT NOT NULL DEFAULT 1,
+  `dolor_cabeza` TINYINT NOT NULL DEFAULT 1,
   `estornudos` TINYINT NOT NULL DEFAULT 1,
   `fiebre` TINYINT NOT NULL DEFAULT 1,
   `fatiga` TINYINT NOT NULL DEFAULT 1,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `covid`.`sintomas` (
   `sin_olores` TINYINT NOT NULL DEFAULT 1,
   `dolor_garganta` TINYINT NOT NULL DEFAULT 1,
   `embarazo` TINYINT NOT NULL DEFAULT 1,
-  'fecha_sitomas' timestamp NOT NULL DEFAULT current_timestamp,
+  'fecha_sintomas' date NOT NULL,
   `alergias` VARCHAR(200) NULL,
   PRIMARY KEY (`id_sintomas`))
 ENGINE = InnoDB;
