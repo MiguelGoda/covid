@@ -1,0 +1,73 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <div class="card">
+                <h4 class="p-4">Agregar Registro</h4>
+                <div class="card-body">
+                    <form action="/registros/add" method="POST">
+                        <div class="form-group">
+                            <label for="">Nombre Paciente</label>
+                            <select class="form-control" name="id_persona" >
+                                {{#each persona}}
+                                <option value="{{id_persona}}"> {{nombre_completo}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nombre Usuario</label>
+                            <select class="form-control" name="id_usuario" >
+                                {{#each usuario}}
+                                <option value="{{id_usuario}}"> {{nombre_completo}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Sintomas</label>
+                            <select class="form-control" name="id_sintomas" >
+                                {{#each sintomas}}
+                                <option value="{{id_sintomas}}"> CUENTA CON SINTOMAS </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Estado Paciente</label>
+                            <select class="form-control" name="id_nivel_enfermedad" >
+                                {{#each nivelEnfermedad}}
+                                <option value="{{NE}}"> {{NNE}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Tipo Registro</label>
+                            <select class="form-control" name="id_tipo_registro" >
+                                {{#each tipoRegistro}}
+                                <option value="{{TR}}"> {{NTR}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Distrito</label>
+                            <select class="form-control" name="id_distrito">
+                                {{#each distrito}}
+                                <option value="{{id_distrito}}"> {{nombre_distritos}} </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="observaciones" rows="2" class="form-control"
+                                placeholder="observaciones"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block" aria-pressed="true" autocomplete="off">
+                                Guardar
+                            </button>
+                            <a href="/sintomas/add" class="btn btn-secondary btn-block" aria-pressed="true">agregar
+                                sintomas</a>
+                            <a href="/persona" class="btn btn-secondary btn-block" aria-pressed="true">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

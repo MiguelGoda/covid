@@ -35,7 +35,7 @@ router.post("/add", async (req, res) => {
         sexo
       };
       const ci = CI
-      // await pool.query("INSERT INTO persona SET ?", [newPersona]);
+      await pool.query("INSERT INTO persona SET ?", [newPersona]);
       console.log('Req Body in', req.body);
       
       console.log( ci, "antes del catch");

@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
-const { json } = require('body-parser');
 
 router.get('/add', async (req, res) => {
-    console.log("controlador sintomas");
-
-    console.log('Query', req.query.ci)
     const cedula = req.query.ci
     const persona = await pool.query(
         "select TP.id_persona, CONCAT(TP.nombre, ' ', TP.ap_paterno, ' ', TP.ap_materno) as nombre_completo from persona TP WHERE CI = ?;", [cedula]
@@ -49,14 +45,13 @@ router.post('/add', async (req, res) => {
             fecha_sintomas,
             alergias
         };
-        console.log(newSintoma);
-        
+        const idP = id_persona;
         await pool.query("INSERT INTO sintomas SET ?", [newSintoma]);
         console.log(req.body, "antes del catch");
         console.log(newSintoma, "newpersona");
 
         req.flash("success", "Registrado correctamente");
-        res.redirect(`/persona`);
+        res.redirect(`/registros/add?idP=${idP}`);
     } catch (error) {
         if (error.code === 'ER_DUP_ENTRY') {
             console.log("aqui if as");

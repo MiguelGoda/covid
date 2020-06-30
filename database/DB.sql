@@ -132,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `covid`.`registro` (
   `id_nivel_enfermedad` INT(11) DEFAULT NULL,
   `tipo_registro` INT(11) DEFAULT NULL,
   `id_distrito` INT(11) DEFAULT  NULL,
-  `fecha_registro` TIMESTAMP NULL DEFAULT current_timestamp,
   `observaciones` VARCHAR(500) NULL,
+  `fecha_registro` TIMESTAMP NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id_registro`))
 ENGINE = InnoDB;
 

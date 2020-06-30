@@ -57,6 +57,7 @@ app.use("/persona", require("./routes/persona"));
 app.use("/sintomas", require("./routes/sintomas"));
 app.use("/tipo_persona", require("./routes/tipo_persona"));
 app.use("/tipo_usuario", require("./routes/tipo_usuario"));
+app.use("/registros", require("./routes/registros"));
 
 //public
 app.use(express.static(path.join(__dirname, "public")));

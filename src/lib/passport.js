@@ -16,7 +16,7 @@ passport.use('local.signin', new LocalStrategy ({
         const usuario = rows[0];
         const validPassword = await helpers.matchPassword(password, usuario.password)
         if (validPassword) {
-            done(null, usuario, req.flash('success', 'Bienvenido ' + usuario.username));
+            done(null, usuario);
         } else {
             done(null, false, req.flash('message' ,'Contraseña incorrecta'))
         }
