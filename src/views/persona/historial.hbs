@@ -1,0 +1,66 @@
+<div class="container p4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+
+                <h1 id="tables" class="my-4 text-center">Historial Paciente</h1>
+                <a href="/registros/add?ci=${{historial.CI}}" class="btn btn-success m-1">Agregar Registro</a>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-hover cellspacing=" 0" width="100%"">
+                    <thead>
+                    <tr>
+                    <th scope=" col">N</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Registro</th>
+                    <th scope="col">Nivel Enf</th>
+                    <th scope="col">Fecha Registro</th>
+                    <th scope="col">Dolor cabeza</th>
+                    <th scope="col">Est.</th>
+                    <th scope="col">Fie.</th>
+                    <th scope="col">Fat.</th>
+                    <th scope="col">tos</th>
+                    <th scope="col">Dif. Res.</th>
+                    <th scope="col">D. Cuer.</th>
+                    <th scope="col">Olf.</th>
+                    <th scope="col">D. G.</th>
+                    <th scope="col">Emba.</th>
+                    <th scope="col">Aler.</th>
+                    <th scope="col">F. Sint.</th>
+                    <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each historial}}
+                        <tr>
+                            <td>{{@key}}</td>
+                            <td> {{nombre_completo}} </td>
+                            <td> {{tipo_registro}} </td>
+                            <td> {{NOMBRE_NIVEL_ENFERMEDAD}} </td>
+                            <td> {{moment fecha_registro format= "DD/MM/YY"}} </td>
+                            <td> {{#if (tiene dolor_cabeza)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene estornudos)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene fiebre)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene fatiga)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene tos_seca)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene dificultad_respirar)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene dolor_cuerpo)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene sin_olores)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene dolor_garganta)}}si{{else}}no{{/if}} </td>
+                            <td> {{#if (tiene embarazo)}}si{{else}}no{{/if}} </td>
+                            <td> {{alergias}} </td>
+                            <td> {{moment fecha_sintomas format= "DD/MM/YY"}} </td>
+                            <td style="display: flex">
+                                <a href="/persona/historial/{{id_persona}}" class="btn btn-info mr-1"><i
+                                        class="fa fa-tasks" aria-hidden="true"></i></a>
+                                <a href="/personas/edit/{{id_persona}}" class="btn btn-warning mr-1"><i
+                                        class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

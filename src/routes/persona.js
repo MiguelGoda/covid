@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require("handlebars.moment");
 const pool = require('../database')
 
 router.get('/add',  async (req,res) => {
@@ -35,7 +36,7 @@ router.post("/add", async (req, res) => {
         sexo
       };
       const ci = CI
-      await pool.query("INSERT INTO persona SET ?", [newPersona]);
+      // await pool.query("INSERT INTO persona SET ?", [newPersona]);
       console.log('Req Body in', req.body);
       
       console.log( ci, "antes del catch");
@@ -47,12 +48,12 @@ router.post("/add", async (req, res) => {
         console.error(error.code); 
         console.log(req.flash("success"));
         req.flash("message", "El CI ya se encuentra resgistrado")
-        res.redirect("persona/add");
+        res.redirect("/persona/add");
       } else {
         console.log("aqui else");
         req.flash("message", "error al registrar")
         console.error(error + " else"); 
-        res.redirect("persona/add");
+        res.redirect("/persona/add");
       }  
     }
   });
@@ -63,5 +64,15 @@ router.post("/add", async (req, res) => {
     res.render("persona/list", {persona})
   });
 
+  router.get("/historial/:id", async (req, res) => {
+    const { id } = req.params;
+    const historial = await pool.query(
+      "SELECT * FROM covid.v_historial_pacientes WHERE id_persona = ?",
+      [id]
+    );
+    res.render("persona/historial", { historial });
+    console.log(historial);
+    
+  });
 
 module.exports = router;

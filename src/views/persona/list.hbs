@@ -11,13 +11,13 @@
                     <tr>
                     <th scope=" col">N</th>
                     <th scope=" col">Nombres</th>
-                    <th scope="col">Fecha Nacimiento</th>
-                    <th scope="col">CI</th>
-                    <th scope="col">Celular</th>
+                    <th scope="col">Consulta</th>
+                    <th scope="col">Nivel Enfermedad</th>
+                    <th scope="col">Fecha Registro</th>
                     <th scope="col">Domicilio</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Contacto</th>
-                    <th scope="col">Contacto</th>
+                    <th scope="col">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,18 +25,15 @@
                         <tr>
                             <td>{{@key}}</td>
                             <td> {{nombre_completo}} </td>
-                            <td> {{fecha_nacimiento}} </td>
-                            <td> {{provincia}} </td>
-                            <td> {{departamento}} </td>
+                            <td> {{tipo_registro}} </td>
+                            <td> {{NOMBRE_NIVEL_ENFERMEDAD}} </td>
+                            <td> {{moment fecha_registro format= "DD/MM/YY"}} </td>
                             <td> {{CI}} </td>
                             <td> {{celular}} </td>
-                            <td> {{estado_civil}} </td>
                             <td> {{domicilio}} </td>
-                            
-                            <td> {{tipo_registro}} </td>
                             <td style="display: flex">
-                                <a href="/personas/delete/{{id_persona}}" class="btn btn-danger mr-1"><i class="far fa-trash-alt"></i></a>
-                                <a href="/personas/edit/{{id_persona}}" class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>
+                                <a href="/persona/historial/{{id_persona}}" class="btn btn-info mr-1"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+                                <a href="/sintomas/add/{{id_persona}}" class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>
                         {{/each}}

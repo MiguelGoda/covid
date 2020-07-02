@@ -69,6 +69,13 @@ router.post('/add', async (req, res) => {
 });
 
 
+router.get("sintomas/add/:id", async (req,res) => {
+    const { id } = req.params;
+    res.redirect('sintomas/add')
+     
+})
+
+
 module.exports = router;
 
     // diaActual = new Date();
