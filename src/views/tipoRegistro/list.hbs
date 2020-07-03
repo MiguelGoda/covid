@@ -1,0 +1,35 @@
+<div class="container p4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h1 id="tables" class="my-4 text-center">Tipos Memos</h1>
+                <a href="/tipoRegistro/add" class="btn btn-success m-1">Agregar Tipo Registro</a>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-hover cellspacing=" 0" width="100%"">
+                    <thead>
+                    <tr>
+                    <th scope=" col">N</th>
+                    <th scope=" col">Nombres</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each tipoRegistro}}
+                        <tr>
+                            <td>{{@key}}</td>
+                            <td> {{nombre_tipo_registro}} </td>
+                            <td> {{descripcion_tipo_registro}} </td>
+                            <td style="display: flex">
+                                <a href="/persona/historial/{{id_persona}}" class="btn btn-info mr-1"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+                                <a href="/sintomas/add/{{id_persona}}" class="btn btn-warning mr-1"><i class="fas fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
