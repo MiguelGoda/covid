@@ -10,7 +10,7 @@
                 <table class="table table-hover cellspacing=" 0" width="100%"">
                     <thead>
                     <tr>
-                    <th scope=" col">N</th>
+                    <th scope="col">N</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Registro</th>
                     <th scope="col">Nivel Enf</th>
@@ -24,9 +24,10 @@
                     <th scope="col">D. Cuer.</th>
                     <th scope="col">Olf.</th>
                     <th scope="col">D. G.</th>
-                    <th scope="col">Emba.</th>
+                    <th scope="col">Emb.</th>
                     <th scope="col">Aler.</th>
                     <th scope="col">F. Sint.</th>
+                    <th scope="col">Observaciones.</th>
                     <th scope="col">Acciones</th>
                     </tr>
                     </thead>
@@ -50,6 +51,7 @@
                             <td> {{#if (tiene embarazo)}}si{{else}}no{{/if}} </td>
                             <td> {{alergias}} </td>
                             <td> {{moment fecha_sintomas format= "DD/MM/YY"}} </td>
+                            <td> {{observaciones}} </td>
                             <td style="display: flex">
                                 <a href="/persona/historial/{{id_persona}}" class="btn btn-info mr-1"><i
                                         class="fa fa-tasks" aria-hidden="true"></i></a>
